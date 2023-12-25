@@ -1,79 +1,139 @@
-<!DoCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Registration Form</title>
         <style>
-            body,html{
-            background-color: lightslategray;
-}
-.p1{
-    text-align: center;
-    font-family: monospace;
-    text-indent: 10px;
-    size:30px;
-}
-.p2{
-    position:absolute;
-    width:28rem;
-    height: 38rem;
-    border:2rem solid black;
-    border-radius: 5rem;
-    background-color: black;
-    color:aliceblue;
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-    margin-left: 25rem;
-    text-align: center;
-}          
-.p3{
-    text-align: center;
-}
-.submit{
-    background:rgb(225, 82, 82);
-    color: white;
-    border-style: outset;
-    border-color:white;
-    height: 40px;
-    width: 150px;
-    font-family: monospace;
-    border-radius:20px;
-}
-.submit:hover{
-    background:rgb(29, 29, 84);
-    color: #fff;
-    border: 1px solid #eee;
-    border-radius: 20px;
-}
+            .mee{
+                padding :50px;
+                background-color:lightslategray;
+            }
+            .not {  
+                padding: 50px;  
+                background-color:black;
+                color:white;
+                height:600px;
+                width:700px;
+                margin-left:auto;
+                margin-right:auto;  
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }  
+            .head{
+                font-family: monospace;
+                color:white;
+            }
+            .submit{
+                background:rgb(202, 93, 93);
+                color: white;
+                border-style: outset;
+                border-color:white;
+                height: 40px;
+                width: 150px;
+                font-family: monospace;
+                border-radius:20px;
+            }
+            .submit:hover {
+                background:rgb(39, 39, 90);
+                color: #fff;
+                border: 1px solid #eee;
+                border-radius: 20px;
+            }
+            .p1{
+                padding: 50px;  
+                background-color:black;
+                color:white;
+                height:200px;
+                width:700px;
+                margin-left: auto;
+                margin-right:auto; 
+                margin-top:50px;
+            }
+            .a1,.a2,.a3,.a4{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;   
+                align-items:center;
+                width:700px;
+                font-family: monospace; 
+            }
+            #name,#email,#password,#birth{
+                height:40px;
+                width:250px;
+                border-radius:10px;
+                margin-left: -40px;
+            }
+            
         </style>
     </head>
-    <body>
-        <div class="p2">
-            <h1 class="p1">REGISTRATION FORM</h1>
-            <p class="p3">___________________________________</p>
-            <form>
-                <p>Full Name:</p>
-            <input type="text" placeholder="Enter your full name" required value=""><br>
-            <p>Email Id:</p>
-            <input type="text" placeholder="Enter a valid emailid" required value=""><br>
-            <p>Password:</p>
-            <input type="password" placeholder="Enter a valid password" required value=""><br>
-            <p>DOB:</p>
-            <input type="date" min="1980-04-30" max="2005-04-30"><br><br>
-            <input type="checkbox" required>Accept terms & conditions<br><br>
-            <button onclick="result()"  class="submit" id="Submit">Submit</button>
-            </form>
-        </div>
-        <div class="box" >
+    <body class="mee">
+        <form id="form">  
+            <div class="not">  
+            <center>  <h1 class="head"> REGISTRATION FORM </h1> </center>
+            <div class="a1">
+                <p>FULL NAME:</p>
+                <input type="text"  id="name" placeholder= "Enter your full name"  required value=""><br><br>
+            </div>
+            <div class="a1">
+                <label>E-MAIL ID:</label>
+                <input type="email"  id="email"  placeholder= "Enter a valid  E-mailid"  required value=""><br><br> 
+            </div>
+            <div class="a3">
+                <label>PASSWORD:</label>
+                <input type="password"  id="password" placeholder= "Enter a valid Password" required value=""><br><br>   
+            </div>
+            <div class="a4">
+                <label>DATE-OF-BIRTH:</label>
+                <input type="date" id="birth"   required value="" min="1980-04-30" max="2005-04-30"><br><br> 
+            </div>
+            <div > 
+                <input type="checkbox"  id="checkbox" required />Accept Terms And Conditions
+                <br><br>
+            </div>
+            <div class="e">
+                <button onclick="result()" class="submit" id="submit">Submit</button>
+            </div>
+            </div>
+        </form>  
+
+       
+        <div class="p1" >
             <center>  <h1 class="head"> Entries </h1> </center> 
             <table style="width:100%" id="table" border="3">
                 <tr>
-                  <th>NAME</th>
-                  <th>E-MAIL</th>
-                  <th>PASSWORD</th>
-                  <th>DOB</th>
-                  <th>ACCEPTED TERMS?</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Password</th>
+                  <th>Date of birth</th>
+                  <th>Accepted terms?</th>
                 </tr>
             </table>
         </div>
+        <script type="text/javascript">
+            var form = document.getElementById('form');
+        var tableBody = document.querySelector('#table tbody');
+        form.addEventListener('submit',function(event){
+            event.preventDefault();
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var dob = document.getElementById('birth').value;
+            var checkbox = document.getElementById('checkbox').checked;
+            localStorage.setItem("Name",name);
+            localStorage.setItem("Email", email);
+            localStorage.setItem("Password", password);
+            localStorage.setItem("Date of Birth", dob);
+            localStorage.setItem("Accept terms?", checkbox);
+        var newRow = document.createElement('tr');
+        newRow.innerHTML = `
+        <td>${name}</td>
+        <td>${email}</td>
+        <td>${password}</td>
+        <td>${dob}</td>
+        <td>${checkbox ? 'Yes' : 'No'}</td>`;
+        tableBody.appendChild(newRow);
+        form.reset();
+        });
+        </script>
     </body>
 </html>
